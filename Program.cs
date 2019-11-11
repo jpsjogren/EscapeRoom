@@ -69,11 +69,11 @@ namespace EscapeRoom
 
 
                     case 2:
-                        // 1 = GÃ¥ vidare till VÃ¤gen, 2 = Tillbaka till huset
+                        // 1 = Gå vidare till Vägen, 2 = Tillbaka till huset
                         levelInfo = world2.Room2(fromLevel, timesInGarden, player.characterType);
                         if (levelInfo == 3)
                             toLevel = 3;
-                        if (levelInfo == 2)
+                        if (levelInfo == 1)
                             toLevel = 1;
 
                         timesInGarden++;
