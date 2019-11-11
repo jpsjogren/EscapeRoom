@@ -53,7 +53,7 @@ namespace EscapeRoom
                 Console.WriteLine(central);
                 //Inledande text, berätta vad som finns här. Och vilka val som kan göras
                 Console.WriteLine("Du har nu tagit dig hela vägen till Centralstationen. Här ifrån går din buss hem.");
-                Console.WriteLine("Men för att kunna komma hem och äta din bakis pizza behöver du ta dig på bussen som står och väntar på dig där borta.\n");
+                Console.WriteLine("Men för att kunna komma hem och äta din bakispizza behöver du ta dig på bussen som står och väntar på dig där borta.\n");
                 Console.WriteLine(inputChoice);
                 Console.Write("> ");
 
@@ -63,7 +63,7 @@ namespace EscapeRoom
 
             Console.WriteLine(choice);
             //Mata in val
-            //Do while vägen eller win
+            //Do while "vägen" eller win
             do
             {
                 //Switch case med alla val
@@ -163,6 +163,7 @@ namespace EscapeRoom
                         break;
                     default:
                         //När det blir fel
+                        
                         while (choice != "prata" && choice != "biljett" && choice != "tillbaka" && choice != "bussen")
                         {
                             Console.Clear();
