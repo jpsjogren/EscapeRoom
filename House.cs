@@ -70,6 +70,7 @@ oOOO() (__ /
                 }
                 else
                 {
+                    //När du dött och förlorar allt du plockat på dig tidigare
                     Console.Clear();
                     Console.WriteLine("***************************************\n");
                     Console.WriteLine(characterName + " is Dead. Respawn i huset");
@@ -87,7 +88,7 @@ oOOO() (__ /
                 }
                
             }
-            else
+            else //Första meddelandet du får vid start
             {
                 Console.Clear();
                 Console.WriteLine("***************************************\n");
@@ -194,6 +195,7 @@ oOOO() (__ /
 
                         tittaISkänk++;
                         break;
+
                     case "easter":
                         return 3;
 

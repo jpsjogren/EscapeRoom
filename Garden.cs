@@ -16,7 +16,6 @@ namespace EscapeRoom
         {
 
 
-
                 string bodart = @"
       __________
      ///////////\
@@ -27,15 +26,6 @@ namespace EscapeRoom
 mmm_________________mmmmmm__mmmmm_mm_____
 
 ";
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,20 +46,59 @@ mmm_________________mmmmmm__mmmmm_mm_____
 
             }
 
-            while (visited == 0) //Först gången du är här
-            {
-                Console.Clear();
-                Console.WriteLine(" ****************************************\n");
-                Console.WriteLine("Du gick ut genom dörren, när du gjorde det trampade du på dörrmattan\nDet praslade till.\n");
-                Console.WriteLine("Du lyfte på mattan och såg en karta.\nVill du plocka upp kartan\n");
-                Console.WriteLine("Tryck J / N");
-                choice = Console.ReadKey().Key.ToString();
-                if (choice.ToUpper() == "J" || choice.ToUpper() == "N")
+            if (visited == 0) {
+                do //Först gången du är här
                 {
-                    visited++;
-                    continue;
-                }
+                    Console.Clear();
+                    Console.WriteLine(" ****************************************\n");
+                    Console.WriteLine("Du gick ut genom dörren, när du gjorde det trampade du på dörrmattan\nDet praslade till.\n");
+                    Console.WriteLine("Du lyfte på mattan och såg en karta.\nVill du plocka upp kartan\n");
+                    Console.WriteLine("Tryck J / N");
+                    choice = Console.ReadKey().Key.ToString();
+                    if (choice.ToUpper() == "J")
+                    {
+
+                        inventory.hasMap = true;
+
+                        Console.Clear();
+                        Console.WriteLine("****************************************\n");
+                        Console.WriteLine("Du plockade upp kartan");
+                        //En metod för att fråga och visa inventoryn. Argument. True är för att visa att vi har lagt till en sak iinvetoryn
+                        inventory.ShowInv(characterType, true);
+
+                        Console.WriteLine("****************************************\n");
+                        Console.WriteLine("Du går ned för trappan till trädgården där ser du en bod");
+                        
+                        Console.WriteLine("\nTryck Enter för att forsätta");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                    else if (choice == "N")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("****************************************\n");
+
+                        Console.WriteLine("Du borde plocka upp karta för den kommer blåsa bort snart");
+                        Console.WriteLine("Tryck J / N");
+                        choice = Console.ReadKey().Key.ToString();
+                        if (choice == "N")
+                        {
+                            Console.WriteLine("\nNähe, då går vi vidare");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            //En metod för att fråga och visa inventoryn. Argument. True är för att visa att vi har lagt till en sak iinvetoryn
+                            inventory.ShowInv(characterType, true);
+                            inventory.hasMap = true;
+                        }
+                    }
+
+                } while (choice != "J" && choice != "N");
             }
+
+
             if (fromLevel == 3) //Om du kommer från Vägen
             {
                 Console.Clear();
@@ -80,7 +109,6 @@ mmm_________________mmmmmm__mmmmm_mm_____
                 choice = Console.ReadKey().Key.ToString();
             }
 
-
             do
             {
 
@@ -89,34 +117,14 @@ mmm_________________mmmmmm__mmmmm_mm_____
 
                     //plocka upp karta
                     case "J":
-                        Console.Clear();
-                        Console.WriteLine("****************************************\n");
-                        Console.WriteLine("Du plockade upp kartan" );
-                        Console.WriteLine("Du går ned för trappan till trädgården där ser du en bod");
                         choice = "bod";
-                        inventory.hasMap = true;
-                        Console.WriteLine("\nTryck Enter för att forsätta");
-                        Console.ReadKey();
-                        Console.Clear();
-                                              
-                        break;
+
+                        continue;
 
                     case "N":
-                        Console.Clear();
-                        Console.WriteLine("****************************************\n");
-                        
-                        Console.WriteLine("Du borde plocka upp karta för den kommer blåsa bort snart");
-                        Console.WriteLine("Tryck J / N");
-                        choice = Console.ReadKey().Key.ToString();
-                        if (choice == "N")
-                        {
-                            choice = "bod";
-                            Console.WriteLine("\nNähe, då går vi vidare");
-                            Console.ReadKey();
-                        }else
-                        {
-                            inventory.hasMap = true;
-                        }
+
+                        choice = "bod";
+
                         continue;
                         
                     //besöka bod och plocka upp gevär
@@ -130,8 +138,10 @@ mmm_________________mmmmmm__mmmmm_mm_____
                             Console.Clear();
                             Console.WriteLine("****************************************\n");
                             Console.WriteLine("Du öppnade dörren till boden och ser en " + (WeaponType)characterType + "\ndetta kan vara bra att ha, du stoppar ner det i din " + (BagType)characterType);
+                            Console.WriteLine("");
                             inventory.hasGun = true;
                             inventory.ShowInv(characterType, true);
+                            Console.WriteLine("****************************************\n");
                             Console.WriteLine("Du vänder dig om och ser en grind som du går mot");
                             Console.WriteLine("\nTryck Enter för att forsätta");
                             choice = "grind";
@@ -177,6 +187,8 @@ mmm_________________mmmmmm__mmmmm_mm_____
 
 
                     case "huset":
+
+                        Console.WriteLine("****************************************\n");
                         Console.WriteLine("Till huset om \n");
                         Console.Write("3...");
                         System.Threading.Thread.Sleep(500);
@@ -193,8 +205,6 @@ mmm_________________mmmmmm__mmmmm_mm_____
                         Console.WriteLine("Välj 'bod' 'grind' 'huset':");
                         choice = Console.ReadLine().ToLower();
                         continue;
-
-
 
 
                 } //End switch case
