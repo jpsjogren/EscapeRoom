@@ -6,6 +6,7 @@ namespace EscapeRoom
         public class Player
         {
         
+        
         public string characterName; 
         public int characterType;       // 1 - för indian. 2 - För monopolgubben.
             

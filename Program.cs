@@ -6,6 +6,7 @@ using System;
  Och skulle vi vilja lägga till fler är det lätt att göra på ett ställe
  */
 public enum BagType
+    //test
 {
     tygpåse = 1,
     hatt = 2,
