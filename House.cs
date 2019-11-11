@@ -208,7 +208,7 @@ oOOO() (__ /
                             choice = Console.ReadLine().ToLower();
                             Console.Clear();
                         }
-                        break;
+                        continue;
                         
                 }
 

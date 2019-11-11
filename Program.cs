@@ -421,7 +421,7 @@ __   __             __    _ _____ _   _
                         }
                     case "e":
                         {
-                            if ((((posi[0] - 1) == wall[i].startx) && (posi[1] >= wall[i].starty && posi[1] < height) || (posi[0] - 1 == (wall[i].starty + wall[i].length - 1)) && posi[1ww] == wall[i].startx))
+                            if ((((posi[0] - 1) == wall[i].startx) && (posi[1] >= wall[i].starty && posi[1] < height) || (posi[0] - 1 == (wall[i].starty + wall[i].length - 1)) && posi[1] == wall[i].startx))
                             {
                                 hit = true;
                             }
