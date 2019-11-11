@@ -2,11 +2,10 @@ using System;
 /*
  Enums är för att slippa if-satser.
 
- Alla med värde 1 tillhör Indianen, värde 2 Monopolgubben, värde 3 Terminator
+ Alla med värde 1 tillhör Indianen, värde 2 Monopolgubben, värde 3 Arnold
  Och skulle vi vilja lägga till fler är det lätt att göra på ett ställe
  */
 public enum BagType
-    //test
 {
     tygpåse = 1,
     hatt = 2,
@@ -28,7 +27,7 @@ namespace EscapeRoom
 
             bool win = false;                   //För att vinna såklart
             int toLevel = 1;                    //Vilken är nästa level du ska till? Bröja med 1 för att komma till huset
-            int levelInfo = 1;                  //Info från tidigare lvl om vad som hänt där. Tillbaka, död eller framåt?
+            int levelInfo = 1;                  //Info från tidigare lvl om vad som hänt där. Tillbaka, död eller framåt. Eller annan info.
             int timesInHouse = 0;               //För att kunna skicka tillbaka till Level 1 att man redan varit där
             int timesInGarden = 0;              //För att kunna skicka tillbaka till Level 2 att man redan varit där
             int timesOnRoad = 0;                //För att kunna skicka tillbaka till Level 3 att man redan varit där
@@ -44,7 +43,7 @@ namespace EscapeRoom
             var world4 = new Feed(inventory);       //Level 4
             var world5 = new Bus(inventory);        //Level 5
 
-            FirstWelcome();
+            FirstWelcome(); //Hälsa välkommen
             player.CreatePerson(); //Skapa Spelare
 
             do //Själva spelandet
@@ -53,7 +52,7 @@ namespace EscapeRoom
                 switch (toLevel)
                 {
                     case 1:
-                        //Eftersom du inte kan gÃ¥ tillbaka sÃ¥ retunerar denna inget. Rakt till lvl2
+                        //Eftersom du inte kan gå tillbaka så retunerar denna inget. Rakt till lvl2
                         levelInfo = world1.Room1(levelInfo, timesInHouse, player.characterName, player.characterType);
                         timesInHouse++;
                         toLevel = 2;
@@ -63,14 +62,9 @@ namespace EscapeRoom
                             Easter();
                             win = true;
                         }
-                            
-
                         break;
-
-
-
                     case 2:
-                        // 1 = Gå vidare till Vägen, 2 = Tillbaka till huset
+                        // 3 = Gå vidare till Vägen, 1 = Tillbaka till huset
                         levelInfo = world2.Room2(fromLevel, timesInGarden, player.characterType);
                         if (levelInfo == 3)
                             toLevel = 3;
@@ -79,9 +73,6 @@ namespace EscapeRoom
 
                         timesInGarden++;
                         break;
-
-
-
                     case 3: //höger eller vänster
                         // 4 = Gå vidare till mata, 2 = Tillbaka till Trädgården
                         levelInfo = world3.Room3(fromLevel, player.characterType);
@@ -98,8 +89,6 @@ namespace EscapeRoom
 
                         timesOnRoad++;
                         break;
-
-
                     case 4: //mata skjuta
                         levelInfo = world4.Room4(player.characterType);
                         // 5 = Gå vidare till Bussen, 2 = Tillbaka till Trädgården, 1 = Död, tillbaka till huset 
@@ -116,31 +105,26 @@ namespace EscapeRoom
 
                         timesIFeed++;
                         break;
-
-
-                    
-
                     case 5:
-                        // 1 = win, 2 = tillbaka till föregående, 3 = Hela vägen tillbaka till huset
+                        // 6 = win, 3 = tillbaka till föregående, 1 = Hela vägen tillbaka till huset
                         levelInfo = world5.Bus1();
-                        if (levelInfo == 1)
+                        if (levelInfo == 6)
                         {
                             win = true;
                         }
-                        if (levelInfo == 2)
-                            toLevel = 3;
                         if (levelInfo == 3)
+                            toLevel = 3;
+                        if (levelInfo == 1)
                             toLevel = 1;
 
                         timesInBus++;
                         break;
 
-
-
                 } //End swtich case
 
             } while (!win);
 
+            //For loop för att visa blinkande text "You Win"
             string winning = @"
 
 __   __             __    _ _____ _   _ 
@@ -161,19 +145,26 @@ __   __             __    _ _____ _   _
                 }
             }
         }
+
+        /************************************************
+         *                                              *
+         *  Här börjar "Easter egg" ett labyrint spel   *   
+         *  Där man kan vinna direkt.                   *
+         *                                              *
+         ************************************************/
+
         static void Easter()
         {
 
 
-            const int BoxX = 60;
+            const int BoxX = 60; //Storlek på ytterväggarna
             const int BoxY = 20;
 
             Random rnd = new Random();
-            int fininsh = rnd.Next(5, 50);
+            int fininsh = rnd.Next(5, 50); // Random utgång
 
-            int[] position;
+            int[] position; // håller koll på vart spelaren är under hela spelet
             position = new int[2] { 15, (BoxY + 2) }; //Start position
-
 
 
             //Skapa en array av väggar
@@ -197,6 +188,7 @@ __   __             __    _ _____ _   _
 
             Welcome();
             Console.Clear();
+
             //The playing
             do
             {
@@ -216,7 +208,7 @@ __   __             __    _ _____ _   _
             Console.WriteLine(" ");
             Console.ResetColor();
 
-            //Win();
+            
 
         }
 
@@ -264,7 +256,8 @@ __   __             __    _ _____ _   _
             Console.ReadKey();
         }
 
-        static void Box(int x, int y, int goal)
+        //Ritar upp boxen
+        static void Box(int x, int y, int goal) 
         {
             Console.SetCursorPosition(0, 2);
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -293,6 +286,8 @@ __   __             __    _ _____ _   _
             }
             Console.ResetColor();
         }
+
+        //Ritar upp väggarna i x-led
         static void Wallx(Wall[] wall)
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -311,6 +306,8 @@ __   __             __    _ _____ _   _
 
             Console.ResetColor();
         }
+
+        //Ritar upp väggarna i Y-led
         static void WallY(Wall[] wall)
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -329,6 +326,8 @@ __   __             __    _ _____ _   _
 
             Console.ResetColor();
         }
+
+        //Tar input från spelaren och flyttar spelaren ett steg
         static int[] Move(int[] posi, int boxx, int boxy, int goal, Wall[] wall)
         {
             boxy += 2; //Offset the box for nice looks
@@ -385,6 +384,7 @@ __   __             __    _ _____ _   _
             return posi;
         }
 
+        //Kollar ifall det är en vägg i ivägen. Retunernar True om det är en vägg i vägen
         static bool Hit(Wall[] wall, int[] posi, string dir)
         {
             bool hit = false;
@@ -439,6 +439,7 @@ __   __             __    _ _____ _   _
             return hit;
         }
     }
+
     class Wall
     {
 

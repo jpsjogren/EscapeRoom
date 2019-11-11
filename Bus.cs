@@ -110,7 +110,7 @@ namespace EscapeRoom
                                 System.Threading.Thread.Sleep(500);
                                 Console.Write("1...");
                                 System.Threading.Thread.Sleep(500);
-                                win = 3;
+                                win = 1;
                                 return win;
                             }
                             else if (inventory.hasTicket)
@@ -135,7 +135,7 @@ namespace EscapeRoom
 
                         Console.Clear();
                         Console.WriteLine("Du vänder tillbaka till vägen");
-                        win = 2;
+                        win = 3;
 
                         return win; // win ska vara false
 
@@ -147,8 +147,8 @@ namespace EscapeRoom
                             {
                                 Console.WriteLine("Du: Japp, varsågod");
                                 Console.WriteLine("Välkommen ombord. Bussen hem går om nån sekund!");
-                                System.Threading.Thread.Sleep(6000);
-                                win = 1;
+                                System.Threading.Thread.Sleep(4000);
+                                win = 6;
                             return win;
                             }
                             else
